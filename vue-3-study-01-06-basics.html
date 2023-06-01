@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Vue 3 Basics">
+        <meta name="keywords" content="Vue 3, Basics">
+        <meta name="author" content="Andre Mesquita" />
+        <meta name="site" content="andremesquita.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Vue 3 Study - Lessons 1 to 6 - Basics</title>
+        <style>
+            .purple-box {
+                background-color: purple;
+                height: 200px;
+                width: 200px;
+            }
+            .blue-box {
+                background-color: lightblue;
+                height: 200px;
+                width: 200px;
+            }
+            .red-box {
+                background-color: red;
+                height: 200px;
+                width: 200px;
+            }
+            .orange-box {
+                background-color: orangered;
+                height: 200px;
+                width: 200px;
+            }
+            .green-box {
+                background-color: green;
+                height: 200px;
+                width: 200px;
+            }
+            .black-box {
+                background-color: black;
+                height: 200px;
+                width: 200px;
+            }
+            .coral-box {
+                background-color: coral;
+                height: 200px;
+                width: 200px;
+            }            
+            [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body style="background-color: darkgrey;">
+        <div id="app" v-cloak>
+            <!-- 1 - display a variable -->
+            {{ greeting }}<br>
+            <!-- 5 - input-event -->
+            <input @keyup.enter="greet(greeting + '!!!!!!!!!!!')" v-model="greeting" />
+            <hr>
+            <!-- 2 - directives -->
+            <div id="v-if-behavior-box-not-apear-at-dom-if-false" v-if="purpleVisible" class="purple-box"></div>
+            <div id="v-show-behavior-box-apear-at-dom-if-false"     v-show="isShow"  class="blue-box"></div>
+            <hr>
+            <!-- 3 - conditionals -->
+            <div v-if="redVisible" class="red-box"></div>
+            <div v-else-if="greenVisible" class="green-box"></div>
+            <div v-else class="orange-box"></div>
+            <hr>
+            <!-- 4 - button directives -->
+            <button v-on:click="isShowBlackBox = !isShowBlackBox">Toggle Black Box | v-on</button><br>
+            <button @click="isShowBlackBox = !isShowBlackBox">Toggle Black Box | @click</button><br>
+            <button @click="toggleBlackBox">Toggle Black Box | method</button><br>
+            <div v-if="isShowBlackBox" class="black-box"></div>
+            <hr>
+            <!-- 6 right click - prevent-stop -->
+            <button @click.right.prevent.stop="toggleCoralkBox">Toggle Coral Box | right click</button><br>
+            <div v-if="isShowCoralBox" class="coral-box"></div>
+        </div>
+
+        <!-- VUE LOAD SCRIPT -->
+        <script src="https://unpkg.com/vue@next"></script>
+
+        <!-- VUE APPLICATION -->        
+        <script>
+            // APP is a main component
+            let app = Vue.createApp(            
+            {
+                // APP variables
+                data: function() {
+                    return {
+                        // 1
+                        greeting: 'Hello Vue 3!',
+
+                        // 2
+                        purpleVisible: true,
+                        isShow: false,
+
+                        // 3
+                        blueVisible: false,
+                        redVisible: false,
+                        greenVisible: false,
+
+                        // 4
+                        isShowBlackBox: false,
+
+                        // 6
+                        isShowCoralBox: false,
+                    }
+                },
+                // APP methods
+                methods: {
+                    // 4
+                    toggleBlackBox() {
+                        this.isShowBlackBox = !this.isShowBlackBox;
+                    },
+                    // 5
+                    greet(greeting) {
+                        console.log(greeting);
+                    },
+                    // 6
+                    toggleCoralkBox() {
+                        this.isShowCoralBox = !this.isShowCoralBox;
+                    }
+                }
+            });
+            // APP is mounting application at element #app
+            app.mount('#app');
+        </script>
+    </body>
+</html>

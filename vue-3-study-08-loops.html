@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Vue 3 Loops">
+        <meta name="keywords" content="Vue 3, Loops">
+        <meta name="author" content="Andre Mesquita" />
+        <meta name="site" content="andremesquita.com" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Vue 3 Study - Lessons 8 - Loops</title>
+        <style>
+            [v-cloak] {
+                display: none;
+            }
+            input {
+                margin: 10px;
+                display: block;
+            }
+        </style>
+    </head>
+    <body style="background-color: darkgrey;">
+        <div id="app" v-cloak>
+            <!-- component use - login form -->
+            <login-form />
+        </div>
+
+        <!-- VUE LOAD SCRIPT -->
+        <script src="https://unpkg.com/vue@next"></script>
+
+        <!-- VUE APPLICATION -->
+        <script>
+            // APP is a main component
+            let app = Vue.createApp({});
+            // COMPONENT LOGIN-FORM
+            app.component('login-form', {
+                // COMPONENT TEMPLATE
+                template: `
+                        <h1>{{ title }}</h1>
+                        <p v-for="(str, i) in inputs" :key="i">
+                            input: {{ str }} | indexOf: {{ i }}
+                        </p>
+                `,
+                // DECLARE A SUB-COMPONENT
+                components: ['custom-input'],
+                // DECLARE VARIABLES
+                data() {
+                    return {
+                        title: 'Login Form',
+                        inputs: ['email', 'password', 'name'],
+                    }
+                }
+            });
+            // APP is mounting application at element #app
+            app.mount('#app');
+        </script>
+    </body>
+</html>
